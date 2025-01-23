@@ -1,1 +1,108 @@
-hello here you can add the task
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: calc(100% - 50px);
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      background-color: #5cb85c;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4cae4c;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #f1f1f1;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    li.completed {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+    .delete {
+      color: #d9534f;
+      cursor: pointer;
+    }
+    .delete:hover {
+      color: #c9302c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <div>
+      <input type="text" id="taskInput" placeholder="Add a new task...">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskText = taskInput.value.trim();
+
+      if (taskText === '') {
+        alert('Please enter a task!');
+        return;
+      }
+
+      const taskList = document.getElementById('taskList');
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span onclick="toggleComplete(this)">${taskText}</span>
+        <span class="delete" onclick="deleteTask(this)">✖</span>
+      `;
+      taskList.appendChild(li);
+      taskInput.value = '';
+    }
+
+    function toggleComplete(taskElement) {
+      taskElement.parentElement.classList.toggle('completed');
+    }
+
+    function deleteTask(deleteElement) {
+      deleteElement.parentElement.remove();
+    }
+  </script>
+</body>
+</html>
